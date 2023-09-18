@@ -1,0 +1,75 @@
+.item {
+    width: 274px;
+    height: 426px;
+    margin-top: 50px;
+  }
+
+  .itemAdvert {
+    width: 274px;
+    height: 354px;
+    margin-bottom: 28px;
+  }
+
+  .itemImage {
+    width: 274px;
+    height: 268px;
+    margin-bottom: 14px;
+    object-fit: cover;
+    border-radius: 14px;
+  }
+
+  .itemInfo {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: calc(24/16);
+    color: #121417;
+  }
+
+  .itemDetaliesBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 274px;
+    height: 40px;
+    margin-top: 8px;
+  }
+
+  .itemDetalies {
+    display: flex;
+    justify-content: flex-start;
+    gap: 6px;
+    font-family: 'Manrope';
+    font-weight: 400;
+    font-size: 12px;
+    line-height: calc(18/12);
+    color: rgba(18, 20, 23, 0.5);
+  }
+
+  .line {
+    height: 16px;
+    border: 1px;
+    color: rgba(18, 20, 23, 0.1);
+  }
+  
+.itemBtn {
+  width: 274px;
+  height: 44px;
+  padding: 12px 99px;
+  background-color: #3470FF;
+  border-width: 0;
+  border-radius: 12px;
+  font-family: 'Manrope';
+  font-weight: 600;
+  font-size: 14px;
+  line-height: calc(20/14);
+  color: #FFFFFF;
+}
+
+.itemBtn:hover,
+.itemBtn:focus {
+  background-color: #0B44CD;
+  cursor: pointer;
+}
