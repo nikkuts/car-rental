@@ -1,0 +1,148 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1200;
+  }
+  
+  .overlay.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .modal {
+    width: 541px;
+    height: 752px;
+    padding: 40px;
+    background-color: #FFFFFF;
+    border-radius: 24px;
+  }
+
+  .itemImage {
+    width: 100%;
+    height: 248px;
+    margin-bottom: 14px;
+    object-fit: cover;
+    border-radius: 14px;
+  }
+
+  .itemAdvert {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .itemInfoBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .itemInfo {
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: calc(24/18);
+    color: #121417;
+  }
+
+  .itemDetaliesBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 277px;
+    height: 40px;
+    margin-top: 8px;
+  }
+
+  .itemDetalies {
+    display: flex;
+    justify-content: flex-start;
+    gap: 6px;
+    font-family: 'Manrope';
+    font-weight: 400;
+    font-size: 12px;
+    line-height: calc(18/12);
+    color: rgba(18, 20, 23, 0.5);
+  }
+
+  .line {
+    height: 16px;
+    border: 1px;
+    color: rgba(18, 20, 23, 0.1);
+  }
+
+  .itemDescription {
+    font-family: 'Manrope';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: calc(20/14);
+    color: #121417;
+  }
+  
+  .itemSupportText {
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: calc(20/14);
+    color: #121417;
+  }
+
+  .itemCharacteristicsBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    width: 461px;
+    height: 72px;
+    margin-top: 8px;
+  }
+
+  .itemСharacteristics {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .characteristic {
+    display: inline-block;
+    width: 133px;
+    height: 32px;
+    padding: 7px 14px;
+    background-color: #F9F9F9;
+    border-radius: 35px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: calc(18/14);
+    color: #363535;
+  }
+
+.itemBtn {
+  width: 168px;
+  height: 44px;
+  padding: 12px 50px;
+  background-color: #3470FF;
+  border-width: 0;
+  border-radius: 12px;
+  font-family: 'Manrope';
+  font-weight: 600;
+  font-size: 14px;
+  line-height: calc(20/14);
+  color: #FFFFFF;
+}
+
+.itemBtn:hover,
+.itemBtn:focus {
+  background-color: #0B44CD;
+  cursor: pointer;
+}

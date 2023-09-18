@@ -48,21 +48,11 @@ export const AdvertsGallery = () => {
                 {isLoading && <Circles/>}
             
                 <ul className={css.advertsGallery}>
-                    {adverts.map(({
-                      id, 
-                      img,
-                      make,
-                      year,
-                      rentalPrice
-                    }) => (
+                    {adverts.map((advert) => (
                     <AdvertsGalleryItem
-                    id={id}
-                    img={img}
-                    make={make}
-                    year={year}
-                    price={rentalPrice}
+                    advert={advert}
                     />
-                ))}
+                    ))}
                 </ul>
 
                 {visibleLoadBtn && 

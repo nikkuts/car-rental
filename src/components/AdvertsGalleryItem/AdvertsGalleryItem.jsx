@@ -1,61 +1,60 @@
-// import { useState } from "react";
-// import PropTypes from 'prop-types';
-// import Modal from "components/Modal/Modal";
+import { useState } from "react";
+import PropTypes from 'prop-types';
+import Modal from "components/Modal/Modal";
 import css from './AdvertsGalleryItem.module.css'; 
 
-export const AdvertsGalleryItem = ({
-    id, 
-    img,
-    make,
-    year,
-    price
-  }) => {
-  /* const [isModalOpen, setIsModalOpen] = useState(false); */
+export const AdvertsGalleryItem = ({advert}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false); 
   
-/* const openModal = () => setIsModalOpen(true);
-const closeModal = () => setIsModalOpen(false); */
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false); 
 
     return (
-      <li className={css.item} key={id}>
+      <li className={css.item} key={advert.id}>
         <div className={css.itemAdvert}>
-          <img src={img} alt={id} 
-          className={css.itemImage} 
-          /* onClick={openModal}  */
+          <img src={advert.img} alt={advert.make} 
+            className={css.itemImage}  
           />
           <div className={css.itemInfo}>
-            {make}, {year}
-            <span>{price}</span>
+            {advert.make}, {advert.year}
+            <span>{advert.rentalPrice}</span>
           </div>
           <div className={css.itemDetaliesBlock}>
             <div className={css.itemDetalies}>
-              {make}
+              {advert.make}
               <div className={css.line}>|</div>
-              {year}
+              {advert.year}
               <div className={css.line}>|</div>
-              {year}
+              {advert.year}
               <div className={css.line}>|</div>
-              {year}
+              {advert.year}
             </div>
             <div className={css.itemDetalies}>
-              {make}
+              {advert.make}
               <div className={css.line}>|</div>
-              {year}
+              {advert.year}
               <div className={css.line}>|</div>
-              {year}
+              {advert.year}
               <div className={css.line}>|</div>
-              {year}
+              {advert.year}
             </div>
           </div>
         </div>
-        <button type='button' className={css.itemBtn}>
+        <button type='button' className={css.itemBtn}
+          onClick={openModal}
+        >
           Learn more
         </button>
+        { isModalOpen && 
+        <Modal
+          advert={advert}
+          onClick={closeModal}
+        />
+        }  
       </li>
     )
 };
   
-/* ImageGalleryItem.propTypes = {
-  id: PropTypes.number.isRequired,
-  webformatURL: PropTypes.string.isRequired,
-  largeImageURL: PropTypes.string.isRequired,
-}; */
+AdvertsGalleryItem.propTypes = {
+  advert: PropTypes.object.isRequired,
+};
