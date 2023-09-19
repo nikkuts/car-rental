@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import PropTypes from 'prop-types';
 import css from './Modal.module.css';
 
-export default function Modal ({advert, onClick}) {
+export const Modal = ({advert, onClick}) => {
   
   const onBackdropClose = e => {
     if (e.currentTarget === e.target) {

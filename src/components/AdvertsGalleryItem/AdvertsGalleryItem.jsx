@@ -1,11 +1,25 @@
 import { useState } from "react";
 import PropTypes from 'prop-types';
-import Modal from "components/Modal/Modal";
+import {Modal} from "components/Modal/Modal";
+import { ReactComponent as VectorHeart } from './icons/heart.svg';
+import { ReactComponent as VectorIsHeart } from './icons/isheart.svg';
+import local from "../../servise/localStorage";
 import css from './AdvertsGalleryItem.module.css'; 
 
 export const AdvertsGalleryItem = ({advert}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isFavoriteAdvert, setIsFavoriteAdvert] = useState(advert.favorite); 
+  const [isFavorite, setIsFavorite] = useState(advert.favorite);
+  
+  const toogleFavorite = (id, obj) => {
+
+    if (isFavorite) {
+      local.remove(id)
+    }
+    else {
+      local.save(id, obj)
+    }
+    setIsFavorite(!isFavorite);
+  };
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false); 
@@ -13,6 +27,11 @@ export const AdvertsGalleryItem = ({advert}) => {
     return (
       <li className={css.item} key={advert.id}>
         <div className={css.itemAdvert}>
+          <div className={css.itemVector}
+            onClick={() => toogleFavorite(advert.id, advert)}
+          >
+            {isFavorite ? <VectorIsHeart/> : <VectorHeart/>}
+          </div>
           <img src={advert.img} alt={advert.make} 
             className={css.itemImage}  
           />

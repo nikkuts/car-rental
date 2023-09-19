@@ -5,9 +5,19 @@
   }
 
   .itemAdvert {
+    position: relative;
     width: 274px;
     height: 354px;
     margin-bottom: 28px;
+  }
+
+  .itemVector {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 242px;
+    top: 14px;
+    cursor: pointer;
   }
 
   .itemImage {
