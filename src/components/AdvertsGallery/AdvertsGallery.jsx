@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Circles } from  'react-loader-spinner';
 import { fetchAdverts } from "../../servise/api";
+import local from "../../servise/localStorage";
 import {AdvertsGalleryItem} from '../AdvertsGalleryItem/AdvertsGalleryItem';
 import css from './AdvertsGallery.module.css';
 
@@ -22,11 +23,22 @@ export const AdvertsGallery = () => {
       try {
         const {data} = await fetchAdverts();
         num * 8 < data.length && setVisibleLoadBtn(true);
+
+        const favoritesAdverts = [];
+
+        for (let i = 0; i < localStorage.length; i += 1) {
+          const key = localStorage.key(i);
+          const value = local.load(key);
+          favoritesAdverts.push(value);
+        };
         
         const partAdverts = [];
+
         for (let i = 0; i < num * 8; i += 1) {
-          partAdverts.push(data[i]);
-        }
+          const valueFavorite = favoritesAdverts.some(({id}) => id === data[i].id);
+          partAdverts.push({...data[i], favorite: valueFavorite});
+        };
+        console.log(partAdverts);
         setAdverts(partAdverts);
         setIsRender(true); 
       } 

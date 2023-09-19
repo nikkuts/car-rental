@@ -4,7 +4,8 @@ import Modal from "components/Modal/Modal";
 import css from './AdvertsGalleryItem.module.css'; 
 
 export const AdvertsGalleryItem = ({advert}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFavoriteAdvert, setIsFavoriteAdvert] = useState(advert.favorite); 
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false); 
