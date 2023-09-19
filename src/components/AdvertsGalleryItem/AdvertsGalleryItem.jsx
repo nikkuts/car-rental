@@ -6,29 +6,33 @@ import { ReactComponent as VectorIsHeart } from './icons/isheart.svg';
 import local from "../../servise/localStorage";
 import css from './AdvertsGalleryItem.module.css'; 
 
-export const AdvertsGalleryItem = ({advert}) => {
+export const AdvertsGalleryItem = ({id, advert, followFavorite}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFavorite, setIsFavorite] = useState(advert.favorite);
   
-  const toogleFavorite = (id, obj) => {
+  const toogleFavorite = (advertId, advertObj) => {
 
     if (isFavorite) {
-      local.remove(id)
+      setIsFavorite(false);
+      local.remove(advertId);
+      // followFavorite();
     }
     else {
-      local.save(id, obj)
+      setIsFavorite(true);
+      local.save(advertId, {...advertObj, favorite: true})
     }
-    setIsFavorite(!isFavorite);
+    // setIsFavorite(!isFavorite);
+    followFavorite();
   };
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false); 
 
     return (
-      <li className={css.item} key={advert.id}>
+      <li className={css.item} key={id}>
         <div className={css.itemAdvert}>
           <div className={css.itemVector}
-            onClick={() => toogleFavorite(advert.id, advert)}
+            onClick={() => toogleFavorite(id, advert)}
           >
             {isFavorite ? <VectorIsHeart/> : <VectorHeart/>}
           </div>
@@ -76,5 +80,7 @@ export const AdvertsGalleryItem = ({advert}) => {
 };
   
 AdvertsGalleryItem.propTypes = {
+  id: PropTypes.number.isRequired,
   advert: PropTypes.object.isRequired,
+  followFavorite: PropTypes.func,
 };

@@ -1,0 +1,38 @@
+.box {
+    text-align: center; 
+  }
+    
+    .advertsGallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 1184px;
+      gap: calc(1184 -(274*4))/3;
+      margin-top: 0;
+      margin-bottom: 100px;
+      padding: 0;
+      list-style: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .loadBtn {
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 150px;
+      font-family: 'Manrope';
+      font-weight: 500;
+      font-size: 16px;
+      line-height: calc(24/16);
+      color: #3470FF;
+      text-decoration: underline;
+      background-color: inherit;
+      border: none;
+    }
+  
+    .loadBtn:hover,
+    .loadBtn:focus {
+      color: #0B44CD;
+      cursor: pointer;
+    }

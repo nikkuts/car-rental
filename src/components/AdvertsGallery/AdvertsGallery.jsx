@@ -38,7 +38,7 @@ export const AdvertsGallery = () => {
           const valueFavorite = favoritesAdverts.some(({id}) => id === data[i].id);
           partAdverts.push({...data[i], favorite: valueFavorite});
         };
-        console.log(partAdverts);
+        
         setAdverts(partAdverts);
         setIsRender(true); 
       } 
@@ -63,6 +63,7 @@ export const AdvertsGallery = () => {
                     {adverts.map((advert) => (
                     <AdvertsGalleryItem
                     advert={advert}
+                    id={advert.id}
                     />
                     ))}
                 </ul>
