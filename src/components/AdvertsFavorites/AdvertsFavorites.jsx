@@ -30,7 +30,7 @@ export const AdvertsFavorites = () => {
 
     useEffect(() => {
         handleFetchAdverts();
-    },[switcher, adverts]);
+    },[switcher]);
 
     return (
         isRender &&
