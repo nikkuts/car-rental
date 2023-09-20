@@ -11,24 +11,25 @@ export const AdvertsGalleryItem = ({id, advert, followFavorite}) => {
   const [isFavorite, setIsFavorite] = useState(advert.favorite);
   
   const toogleFavorite = (advertId, advertObj) => {
-
+    const favoritesAdverts = local.load('favorites') ? local.load('favorites') : [];
+  
     if (isFavorite) {
       setIsFavorite(false);
-      local.remove(advertId);
-      // followFavorite();
+      const newFavoritesAdverts = favoritesAdverts.filter(item => item.id !== advertId);
+      local.save('favorites', newFavoritesAdverts);
+      followFavorite(advertId);
     }
     else {
       setIsFavorite(true);
-      local.save(advertId, {...advertObj, favorite: true})
+      favoritesAdverts.push({...advertObj, favorite: true});
+      local.save('favorites', favoritesAdverts)
     }
-    // setIsFavorite(!isFavorite);
-    followFavorite();
   };
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false); 
 
-    return (
+    return ( 
       <li className={css.item} key={id}>
         <div className={css.itemAdvert}>
           <div className={css.itemVector}

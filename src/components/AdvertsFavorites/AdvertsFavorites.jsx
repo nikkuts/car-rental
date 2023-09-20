@@ -5,27 +5,15 @@ import css from './AdvertsFavorites.module.css';
 
 export const AdvertsFavorites = () => {
     const [adverts, setAdverts] = useState([]);
-    const [switcher, setSwitcher] = useState(false);
-    const [isRender, setIsRender] = useState(false);
+    const [switcher, setSwitcher] = useState(null);
 
-    const changeSwitcher = () => {
-        setSwitcher(!switcher);
+    const changeSwitcher = (id) => {
+        setSwitcher(id);
     };
   
     const handleFetchAdverts = () => {
-      setIsRender(false);
-
-        const favoritesAdverts = [];
-
-        for (let i = 0; i < localStorage.length; i += 1) {
-          const key = localStorage.key(i);
-          const value = local.load(key);
-          favoritesAdverts.push(value);
-        };
-     
-        console.log(favoritesAdverts);
+        const favoritesAdverts = local.load('favorites') ? local.load('favorites') : [];
         setAdverts(favoritesAdverts)
-        setIsRender(true); 
     };
 
     useEffect(() => {
@@ -33,7 +21,6 @@ export const AdvertsFavorites = () => {
     },[switcher]);
 
     return (
-        isRender &&
             <div className={css.box}>
             
                 <ul className={css.advertsGallery}>

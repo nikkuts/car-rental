@@ -19,21 +19,13 @@ export const AdvertsGallery = () => {
     const handleFetchAdverts = async (num) => {
       setIsRender(false);
       setVisibleLoadBtn(false);
+      const favoritesAdverts = local.load('favorites') ? local.load('favorites') : [];
 
       try {
         const {data} = await fetchAdverts();
         num * 8 < data.length && setVisibleLoadBtn(true);
-
-        const favoritesAdverts = [];
-
-        for (let i = 0; i < localStorage.length; i += 1) {
-          const key = localStorage.key(i);
-          const value = local.load(key);
-          favoritesAdverts.push(value);
-        };
         
         const partAdverts = [];
-
         for (let i = 0; i < num * 8; i += 1) {
           const valueFavorite = favoritesAdverts.some(({id}) => id === data[i].id);
           partAdverts.push({...data[i], favorite: valueFavorite});
