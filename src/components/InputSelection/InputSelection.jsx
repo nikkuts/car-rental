@@ -1,21 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { ReactComponent as VectorDeployment } from './icons/deployment.svg';
 import { ReactComponent as VectorFolding } from './icons/folding.svg';
 import css from './InputSelection.module.css';
 
-export const InputSelection = ({options, placeholder}) => {
+export const InputSelection = ({options, placeholder, name, onChange}) => {
     const [inputValue, setInputValue] = useState('');
     const [isList, setIsList] = useState(false);
+
+    const handleInputChange = (e) => {
+      const {value} = e.target;
+      setInputValue(value);
+    };
+
+    const handleOptionSelect = (option)  => {
+      setInputValue(option);
+    };
     
     const toogleList = () => setIsList(!isList);
-
-    const handleOptionSelect = (option) => {
-        setInputValue(option);
-      };
-    
-      const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-      };
     
       const renderOptions = () => {
         return options.map((option, index) => (
@@ -27,6 +29,10 @@ export const InputSelection = ({options, placeholder}) => {
           </li>
         ));
       };
+
+      useEffect(() => {
+        onChange(name, inputValue);
+      }, [inputValue, name]);
     
       return (
         <div className={css.box}>
@@ -34,6 +40,7 @@ export const InputSelection = ({options, placeholder}) => {
             className={css.input}
             type="text"
             placeholder={placeholder}
+            name={name}
             value={inputValue}
             onChange={handleInputChange}
           />
@@ -50,3 +57,10 @@ export const InputSelection = ({options, placeholder}) => {
         </div>
       );
     };
+
+    InputSelection.propTypes = {
+      options: PropTypes.array.isRequired,
+      placeholder: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      onChange: PropTypes.func.isRequired,
+  };

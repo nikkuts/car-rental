@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { InputSelection } from "components/InputSelection/InputSelection";
 import css from './SearchBar.module.css';
 
@@ -46,21 +46,30 @@ export const SearchBar = () => {
 
         const handleInputChange = (e) => {
             const { name, value } = e.target;
-            setQuery({
-              ...query,
-              [name]: value,
-            });
+            
+            console.log(value);
+            setQuery(prevQuery => ({
+                ...prevQuery,
+                [name]: value,
+            }));
           };
 
-          const handleSearch = (e) => {
+        const handleInputSelect = useCallback((inputName, value)  => {
+            setQuery(prevQuery => ({
+              ...prevQuery,
+              [inputName]: value,
+            }));
+          }, []);
+
+        const handleSearch = (e) => {
             e.preventDefault();
     
             if (query === '') {
               alert('Enter a search');
               return;
             }
+            console.log(query);
             // onSubmit(query);
-            setQuery('');
           };
 
     return (
@@ -69,15 +78,19 @@ export const SearchBar = () => {
                 <div className={css.brand}>
                     <p className={css.title}>Car brand</p>
                     <InputSelection
-                    placeholder={"Enter the text"} 
+                    placeholder={"Enter the text"}
+                    name={'make'} 
                     options={makes}
+                    onChange={handleInputSelect}
                     />
                 </div>
                 <div className={css.price}>
                     <p className={css.title}>Price/ 1 hour</p>
                     <InputSelection
-                    placeholder={"To $"} 
+                    placeholder={"To $"}
+                    name={'priceTo'} 
                     options={price}
+                    onChange={handleInputSelect}
                     />
                 </div>
                 <div className={css.mileage}>
@@ -88,7 +101,7 @@ export const SearchBar = () => {
                                 className={css.input}
                                 type="text"
                                 placeholder={'From'}
-                                value={query.mileageFrom}
+                                name='mileageFrom'
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -97,7 +110,7 @@ export const SearchBar = () => {
                                 className={css.input}
                                 type="text"
                                 placeholder={'To'}
-                                value={query.mileageTo}
+                                name='mileageTo'
                                 onChange={handleInputChange}
                             />
                         </div>
