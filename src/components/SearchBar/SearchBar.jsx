@@ -42,7 +42,7 @@ export const SearchBar = () => {
         140,
         150   
     ];
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState();
 
         const handleInputChange = (e) => {
             const { name, value } = e.target;
@@ -54,17 +54,18 @@ export const SearchBar = () => {
             }));
           };
 
-        const handleInputSelect = useCallback((inputName, value)  => {
+        const handleInputSelect = useCallback((inputValue, name)  => {
             setQuery(prevQuery => ({
               ...prevQuery,
-              [inputName]: value,
+              [name]: inputValue,
             }));
           }, []);
 
         const handleSearch = (e) => {
             e.preventDefault();
+            const {make, priceTo, mileageFrom, mileageTo} = query;
     
-            if (query === '') {
+            if (!make && !priceTo && !mileageFrom && !mileageTo) {
               alert('Enter a search');
               return;
             }

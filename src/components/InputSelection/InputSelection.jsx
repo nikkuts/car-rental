@@ -5,7 +5,7 @@ import { ReactComponent as VectorFolding } from './icons/folding.svg';
 import css from './InputSelection.module.css';
 
 export const InputSelection = ({options, placeholder, name, onChange}) => {
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState();
     const [isList, setIsList] = useState(false);
 
     const handleInputChange = (e) => {
@@ -31,7 +31,7 @@ export const InputSelection = ({options, placeholder, name, onChange}) => {
       };
 
       useEffect(() => {
-        onChange(name, inputValue);
+        onChange(inputValue, name);
       }, [inputValue, name]);
     
       return (
