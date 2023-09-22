@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { InputSelection } from "components/InputSelection/InputSelection";
-import {makes, price} from '../../data.js';
+import {makes, price} from '../../js/data';
 import css from './SearchBar.module.css';
 
 export const SearchBar = ({onSubmit}) => {
@@ -9,10 +9,16 @@ export const SearchBar = ({onSubmit}) => {
 
         const handleInputChange = (e) => {
             const { name, value } = e.target;
+            const parseValue = parseFloat(value);
+            
+            if (isNaN(parseValue)) {
+                alert('Enter a number.');
+              return;
+            }
             
             setQuery(prevQuery => ({
                 ...prevQuery,
-                [name]: value,
+                [name]: parseValue,
             }));
           };
 
@@ -25,13 +31,44 @@ export const SearchBar = ({onSubmit}) => {
 
         const handleSearch = (e) => {
             e.preventDefault();
+            console.log(query);
             const {make, priceTo, mileageFrom, mileageTo} = query;
-    
-            if (!make && !priceTo && !mileageFrom && !mileageTo) {
-              alert('Enter a search');
-              return;
+            
+    console.log(mileageFrom);
+            // if (!make && !priceTo && !mileageFrom && !mileageTo) {
+            //   alert('No search options. Enter your search query.');
+            //   return;
+            // }
+
+            if (make) {
+                const isValidMake = makes.some((item) => item.toLowerCase() === make.toLowerCase());
+                if (isValidMake === false) {
+                    alert('Invalid car brand value. Choose a car brand from the list.');
+                    return;
+                }
             }
-    
+
+            if (priceTo) {
+                const isValidPrice = price.some((item) => item === priceTo);
+                if (isValidPrice === false) {
+                    alert('Invalid rental price value. Choose a rental price from the list.');
+                    return;
+                }
+            }
+                
+            if (mileageFrom && mileageTo) {
+                if (mileageFrom > mileageTo) {
+                    alert('Mileage range error. Change your search query.');
+                    return;
+                }
+            }
+            
+            if (!mileageFrom && !mileageTo) {
+                alert('No search options. Enter your search query.');
+                return;    
+            }
+
+    console.log(query);
             onSubmit(query);
           };
 
