@@ -1,53 +1,15 @@
 import { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { InputSelection } from "components/InputSelection/InputSelection";
+import {makes, price} from '../../data.js';
 import css from './SearchBar.module.css';
 
-export const SearchBar = () => {
-    const makes = [
-        "Buick",
-        "Volvo",
-        "HUMMER",
-        "Subaru",
-        "Mitsubishi",
-        "Nissan",
-        "Lincoln",
-        "GMC",
-        "Hyundai",
-        "MINI",
-        "Bentley",
-        "Mercedes-Benz",
-        "Aston Martin",
-        "Pontiac",
-        "Lamborghini",
-        "Audi",
-        "BMW",
-        "Chevrolet",
-        "Mercedes-Benz",
-        "Chrysler",
-        "Kia",
-        "Land"        
-    ];
-    const price = [
-        30,
-        40,
-        50,
-        60,
-        70,
-        80,
-        90,
-        100,
-        110,
-        120,
-        130,
-        140,
-        150   
-    ];
+export const SearchBar = ({onSubmit}) => {
     const [query, setQuery] = useState();
 
         const handleInputChange = (e) => {
             const { name, value } = e.target;
             
-            console.log(value);
             setQuery(prevQuery => ({
                 ...prevQuery,
                 [name]: value,
@@ -69,8 +31,8 @@ export const SearchBar = () => {
               alert('Enter a search');
               return;
             }
-            console.log(query);
-            // onSubmit(query);
+    
+            onSubmit(query);
           };
 
     return (
@@ -125,4 +87,8 @@ export const SearchBar = () => {
             </button>
         </form>
   )
+};
+
+SearchBar.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
 };
