@@ -32,7 +32,7 @@ export const InputSelection = ({options, placeholder, name, onChange}) => {
 
       useEffect(() => {
         onChange(inputValue, name);
-      }, [inputValue, name]);
+      }, [inputValue, name, onChange]);
     
       return (
         <div className={css.box}>
