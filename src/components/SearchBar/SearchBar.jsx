@@ -11,11 +11,6 @@ export const SearchBar = ({onSubmit}) => {
             const { name, value } = e.target;
             const parseValue = parseFloat(value);
             
-            if (isNaN(parseValue)) {
-                alert('Enter a number.');
-              return;
-            }
-            
             setQuery(prevQuery => ({
                 ...prevQuery,
                 [name]: parseValue,
@@ -47,6 +42,11 @@ export const SearchBar = ({onSubmit}) => {
                     alert('Invalid rental price value. Choose a rental price from the list.');
                     return;
                 }
+            }
+
+            if (isNaN(mileageFrom) || isNaN(mileageTo)) {
+                alert('Mileage must be specified as a number. Change your search query.');
+              return;
             }
                 
             if (mileageFrom && mileageTo) {
