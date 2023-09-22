@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from 'prop-types';
 import { Circles } from  'react-loader-spinner';
 import { fetchAdverts } from "../../servise/api";
@@ -18,7 +18,6 @@ export const AdvertsGallery = ({query}) => {
     };
 
     const selectByQuery = (adverts, query) => {
-      console.log(query);
       const {make, priceTo, mileageFrom, mileageTo} = query;
       let result = adverts;
 
@@ -61,7 +60,7 @@ export const AdvertsGallery = ({query}) => {
       return partAdverts;
     };
 
-    const handleFetchAdverts = async (number, query) => {
+    const handleFetchAdverts = useCallback(async (number, query) => {
       setIsRender(false);
       setVisibleLoadBtn(false);
 
@@ -69,7 +68,7 @@ export const AdvertsGallery = ({query}) => {
         const {data} = await fetchAdverts();
         
         const result = query ? selectByQuery(data, query) : data;
-        console.log(result);
+      
         const partAdverts = selectByNumberPart(result, number);
 
         setAdverts(partAdverts);
@@ -81,11 +80,11 @@ export const AdvertsGallery = ({query}) => {
       finally {
         setIsLoading(false);
       };
-    };
+    },[]); 
 
     useEffect(() => {
         handleFetchAdverts(numberPart, query);
-    },[numberPart, query]);
+    },[numberPart, query, handleFetchAdverts]);
 
     return (
         isRender &&
