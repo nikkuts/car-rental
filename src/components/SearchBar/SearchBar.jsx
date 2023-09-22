@@ -31,15 +31,8 @@ export const SearchBar = ({onSubmit}) => {
 
         const handleSearch = (e) => {
             e.preventDefault();
-            console.log(query);
             const {make, priceTo, mileageFrom, mileageTo} = query;
-            
-    console.log(mileageFrom);
-            // if (!make && !priceTo && !mileageFrom && !mileageTo) {
-            //   alert('No search options. Enter your search query.');
-            //   return;
-            // }
-
+ 
             if (make) {
                 const isValidMake = makes.some((item) => item.toLowerCase() === make.toLowerCase());
                 if (isValidMake === false) {
@@ -63,12 +56,11 @@ export const SearchBar = ({onSubmit}) => {
                 }
             }
             
-            if (!mileageFrom && !mileageTo) {
+            if (!make && !priceTo && !mileageFrom && !mileageTo) {
                 alert('No search options. Enter your search query.');
                 return;    
             }
 
-    console.log(query);
             onSubmit(query);
           };
 
