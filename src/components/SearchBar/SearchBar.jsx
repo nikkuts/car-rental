@@ -44,9 +44,9 @@ export const SearchBar = ({onSubmit}) => {
                 }
             }
 
-            if (isNaN(mileageFrom) || isNaN(mileageTo)) {
+            if ((mileageFrom && isNaN(mileageFrom)) || (mileageTo && isNaN(mileageTo))) {
                 alert('Mileage must be specified as a number. Change your search query.');
-              return;
+                return;
             }
                 
             if (mileageFrom && mileageTo) {
@@ -55,7 +55,7 @@ export const SearchBar = ({onSubmit}) => {
                     return;
                 }
             }
-            
+
             if (!make && !priceTo && !mileageFrom && !mileageTo) {
                 alert('No search options. Enter your search query.');
                 return;    

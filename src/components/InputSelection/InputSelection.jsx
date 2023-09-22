@@ -8,16 +8,17 @@ export const InputSelection = ({options, placeholder, name, onChange}) => {
     const [inputValue, setInputValue] = useState();
     const [isList, setIsList] = useState(false);
 
+    const toogleList = () => setIsList(!isList);
+
     const handleInputChange = (e) => {
       const {value} = e.target;
       setInputValue(value);
     };
 
     const handleOptionSelect = (option)  => {
+      setIsList(false)
       setInputValue(option);
     };
-    
-    const toogleList = () => setIsList(!isList);
     
       const renderOptions = () => {
         return options.map((option, index) => (

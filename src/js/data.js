@@ -1,5 +1,5 @@
 const makes = [
-    "Buick",
+  "Buick",
   "Volvo",
   "HUMMER",
   "Subaru",
