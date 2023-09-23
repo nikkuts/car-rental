@@ -11,6 +11,11 @@ export const Modal = ({advert, onClick}) => {
     }
   };
 
+  const callCompany = () => {
+    const phoneNumber = '+380730000000';
+    window.location.href = `tel:${phoneNumber}`;
+  };
+
   useEffect(() => {
     const keyDown = e => {
       if (e.code === 'Escape') {
@@ -108,7 +113,7 @@ export const Modal = ({advert, onClick}) => {
                             </div>
                         </div>
                         <button type='button' className={css.itemBtn}
-                        //   onClick={}
+                          onClick={callCompany}
                         >
                         Rental Car
                         </button>

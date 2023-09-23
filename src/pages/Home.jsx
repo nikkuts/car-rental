@@ -15,7 +15,7 @@ export const Home = () => {
     return (
         <div style={styles.container}>
         <h1 style={styles.title}>
-        Application for choosing cars for rent in Ukraine{' '}
+          Application for choosing cars for rent in Ukraine {' '}
         </h1>
       </div>
     )

@@ -1,6 +1,4 @@
-// import { useEffect, lazy } from "react";
 import { Route, Routes } from 'react-router-dom';
-
 import {SharedLayout} from './SharedLayout/SharedLayout';
 import {Home} from '../pages/Home';
 import {Catalog} from '../pages/Catalog';

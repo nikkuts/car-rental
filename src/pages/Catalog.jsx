@@ -18,5 +18,5 @@ export const Catalog = () => {
         query={query}
       />
     </>
-)
+  )
 };

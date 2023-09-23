@@ -15,18 +15,18 @@ export const AdvertsGallery = ({query}) => {
     const [visibleLoadBtn, setVisibleLoadBtn] = useState(false);
 
     const changeNumberPart = () => {
-      setNumberPart(numberPart + 1);
+      setNumberPart(prevState => prevState + 1);
     };
 
     const handleFetchAdverts = useCallback(async (number, query) => {
+      setIsLoading(true);
       setIsRender(false);
-      setVisibleLoadBtn(false);
 
       try {
         const {data} = await fetchAdverts();
         const result = query ? selectByQuery(data, query) : data;
       
-        number * 8 < result.length && setVisibleLoadBtn(true);
+        number * 8 < result.length ? setVisibleLoadBtn(true) : setVisibleLoadBtn(false);
 
         const partAdverts = selectByNumberPart(result, number);
         setAdverts(partAdverts);
