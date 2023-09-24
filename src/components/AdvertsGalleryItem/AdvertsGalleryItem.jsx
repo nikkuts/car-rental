@@ -46,11 +46,11 @@ export const AdvertsGalleryItem = ({id, advert, followFavorite}) => {
           </div>
           <div className={css.itemDetaliesBlock}>
             <div className={css.itemDetalies}>
-              {advert.make}
+              {advert.address.split(',')[1]}
               <div className={css.line}>|</div>
-              {advert.year}
+              {advert.address.split(',')[2]}
               <div className={css.line}>|</div>
-              {advert.year}
+              {advert.rentalCompany}
               <div className={css.line}>|</div>
               {advert.year}
             </div>

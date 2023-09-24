@@ -45,9 +45,9 @@ export const Modal = ({advert, onClick}) => {
                             </p>
                             <div className={css.itemDetaliesBlock}>
                                 <div className={css.itemDetalies}>
-                                    {advert.make}
+                                    {advert.address.split(',')[1]}
                                     <div className={css.line}>|</div>
-                                    {advert.year}
+                                    {advert.address.split(',')[2]}
                                     <div className={css.line}>|</div>
                                     {advert.year}
                                     <div className={css.line}>|</div>
