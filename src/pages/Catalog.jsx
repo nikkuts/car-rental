@@ -6,6 +6,7 @@ export const Catalog = () => {
   const [query, setQuery] = useState();
 
   const handleSearch = (search) => {
+    console.log(search);
     setQuery(search);
   };
 

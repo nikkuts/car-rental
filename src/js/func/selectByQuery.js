@@ -1,13 +1,13 @@
 export const selectByQuery = (adverts, query) => {
-    const {make, priceTo, mileageFrom, mileageTo} = query;
+    const {make, parsePriceTo, mileageFrom, mileageTo} = query;
     let result = adverts;
 
     if (make) {
       result = adverts.filter(advert => advert.make.toLowerCase() === make.toLowerCase());
     } 
 
-    if (priceTo) {
-      result = result.filter(advert => parseFloat(advert.rentalPrice.replace(/[^0-9.]/g, '')) <= priceTo)
+    if (parsePriceTo) {
+      result = result.filter(advert => parseFloat(advert.rentalPrice.replace(/[^0-9.]/g, '')) <= parsePriceTo);
     } 
 
     if (mileageFrom && mileageTo) {
