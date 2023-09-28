@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[415],{415:function(e,t,n){n.r(t);var i=n(329),r={container:{display:"flex",alignItems:"center",justifyContent:"center"},title:{fontWeight:500,fontSize:48,textAlign:"center"}};t.default=function(){return(0,i.jsx)("div",{style:r.container,children:(0,i.jsxs)("h1",{style:r.title,children:["Application for choosing cars for rent in Ukraine "," "]})})}}}]);
+//# sourceMappingURL=415.058da590.chunk.js.map
