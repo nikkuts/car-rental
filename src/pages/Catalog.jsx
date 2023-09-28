@@ -1,17 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoading } from "../redux/adverts/selectors";
+import { fetchAdverts } from "../redux/adverts/operations";
 import { SearchBar } from "components/SearchBar/SearchBar";
 import { AdvertsGallery } from "../components/AdvertsGallery/AdvertsGallery";
 
-export const Catalog = () => {
+const Catalog = () => {
   const [query, setQuery] = useState();
 
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+
   const handleSearch = (search) => {
-    console.log(search);
     setQuery(search);
   };
 
+  useEffect(() => {
+    dispatch(fetchAdverts());
+  }, [dispatch]);
+
   return (
     <>
+      <div>{isLoading && <b>Request in progress...</b>}</div>
       <SearchBar
         onSubmit={handleSearch}
       />
@@ -21,3 +31,5 @@ export const Catalog = () => {
     </>
   )
 };
+
+export default Catalog;

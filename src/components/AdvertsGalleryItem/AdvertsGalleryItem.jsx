@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import {Modal} from "components/Modal/Modal";
 import { ReactComponent as VectorHeart } from './icons/heart.svg';
@@ -8,26 +8,38 @@ import css from './AdvertsGalleryItem.module.css';
 
 export const AdvertsGalleryItem = ({id, advert, followFavorite}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(advert.favorite);
-  
-  const toogleFavorite = (advertId, advertObj) => {
-    const favoritesAdverts = local.load('favorites') ? local.load('favorites') : [];
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const checkFavorites = useCallback(() => {
+    const idFavorites = local.load('favorites') ? local.load('favorites') : [];
+    const valueIsFavorite = idFavorites.includes(id);
+    setIsFavorite(valueIsFavorite);
+  }, [id]); 
+
+  const toogleFavorite = () => {
+    const idFavorites = local.load('favorites') ? local.load('favorites') : [];
   
     if (isFavorite) {
+      const newIdFavorites = idFavorites.filter(idFavorite => idFavorite !== id);
+      local.save('favorites', newIdFavorites);
       setIsFavorite(false);
-      const newFavoritesAdverts = favoritesAdverts.filter(item => item.id !== advertId);
-      local.save('favorites', newFavoritesAdverts);
-      followFavorite(advertId);
+      followFavorite(id);
     }
     else {
+      console.log(idFavorites);
+      idFavorites.push(id);
+      console.log(idFavorites);
+      local.save('favorites', idFavorites);
       setIsFavorite(true);
-      favoritesAdverts.push({...advertObj, favorite: true});
-      local.save('favorites', favoritesAdverts)
     }
   };
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false); 
+
+  useEffect(() => {
+    checkFavorites();
+  }, [checkFavorites]);
 
     return ( 
       <li className={css.item} key={id}>

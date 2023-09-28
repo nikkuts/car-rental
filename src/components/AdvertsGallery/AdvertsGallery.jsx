@@ -1,72 +1,55 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useSelector } from "react-redux";
 import PropTypes from 'prop-types';
-import { Circles } from  'react-loader-spinner';
-import { fetchAdverts } from "../../servise/api";
+import { selectAllTAdverts } from "../../redux/adverts/selectors";
 import { AdvertsGalleryItem } from '../AdvertsGalleryItem/AdvertsGalleryItem';
-import { selectByNumberPart } from 'js/func/selectByNumberPart';
 import { selectByQuery } from "js/func/selectByQuery";
 import css from './AdvertsGallery.module.css';
 
-export const AdvertsGallery = ({query}) => {
-    const [adverts, setAdverts] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isRender, setIsRender] = useState(false);
-    const [numberPart, setNumberPart] = useState(1);
-    const [visibleLoadBtn, setVisibleLoadBtn] = useState(false);
+export const AdvertsGallery = ({ query }) => {
+  const [visibleAdverts, setVisibleAdverts] = useState([]);
+  const [numberPart, setNumberPart] = useState(1);
+  const [visibleLoadBtn, setVisibleLoadBtn] = useState(false);
 
-    const changeNumberPart = () => {
-      setNumberPart(prevState => prevState + 1);
-    };
+  const allAdverts = useSelector(selectAllTAdverts);
 
-    const handleFetchAdverts = useCallback(async (number, query) => {
-      setIsLoading(true);
-      setIsRender(false);
+  const changeNumberPart = () => {
+    setNumberPart(prevState => prevState + 1);
+  };
 
-      try {
-        const {data} = await fetchAdverts();
-        const result = query ? selectByQuery(data, query) : data;
-      
-        number * 8 < result.length ? setVisibleLoadBtn(true) : setVisibleLoadBtn(false);
+  const getVisibleAdverts = useCallback(() => {
+    const result = query ? selectByQuery(allAdverts, query) : allAdverts;
 
-        const partAdverts = selectByNumberPart(result, number);
-        setAdverts(partAdverts);
-        setIsRender(true); 
-      } 
-      catch (error) {
-        alert("ERROR Sorry, ads have not loaded. Please try again."); 
-      } 
-      finally {
-        setIsLoading(false);
-      };
-    },[]); 
+    const startIndex = (numberPart - 1) * 8;
+    const endIndex = Math.min(startIndex + 8, result.length);
+    setVisibleLoadBtn(endIndex < result.length);
 
-    useEffect(() => {
-        handleFetchAdverts(numberPart, query);
-    },[numberPart, query, handleFetchAdverts]);
+    const partAdverts = result.slice(0, endIndex);
+    setVisibleAdverts(partAdverts);
+  }, [allAdverts, query, numberPart]);
 
-    return (
-        isRender &&
-            <div className={css.box}>
-                {isLoading && <Circles/>}
-            
-                <ul className={css.advertsGallery}>
-                    {adverts.map((advert) => (
-                    <AdvertsGalleryItem
-                    advert={advert}
-                    id={advert.id}
-                    />
-                    ))}
-                </ul>
+  useEffect(() => {
+    getVisibleAdverts();
+  }, [numberPart, query, getVisibleAdverts]);
 
-                {visibleLoadBtn && 
-                <button type='button' className={css.loadBtn}
-                  onClick={changeNumberPart}
-                >
-                  Load more
-                </button>
-                }                
-            </div>
-    )
+  return (
+      <div className={css.box}>
+        <ul className={css.advertsGallery}>
+          {visibleAdverts.map(advert => (
+            <AdvertsGalleryItem 
+            advert={advert} 
+            id={advert.id} 
+            />
+          ))}
+        </ul>
+
+        {visibleLoadBtn && (
+          <button type="button" className={css.loadBtn} onClick={changeNumberPart}>
+            Load more
+          </button>
+        )}
+      </div>
+  );
 };
 
 AdvertsGallery.propTypes = {
