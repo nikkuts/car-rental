@@ -44,3 +44,31 @@ Mykola Kuts
 GitHub: https://github.com/nikkuts 
 Telegram: https://t.me/nickkuts888
 Email: nickkuts888@gmail.com 
+
+ <li className={css.itemDetalies}>
+            {/* <div className={css.detaliess}> */}
+              {/* <span className={css.detalies}>{advert.address.split(',')[1]}</span> */}
+              {advert.address.split(',')[1]}
+              <span className={css.line}>|</span>
+              {/* <span className={css.detalies}>{advert.address.split(',')[2]}</span> */}
+              {advert.address.split(',')[2]}
+              <span className={css.line}>|</span>
+              {/* <span className={css.detalies}>{advert.rentalCompany}</span> */}
+              {advert.rentalCompany}
+              <span className={css.line}>|</span>
+              <span className={css.detalies}>Premium</span>
+              <br></br>
+            {/* </div> */}
+            {/* <div className={css.detaliess}> */}
+              {advert.type}
+              <span className={css.line}>|</span>
+              {/* <span className={css.detalies}>{advert.model}</span> */}
+              {advert.model}
+              <span className={css.line}>|</span>
+              {/* <span className={css.detalies}>{advert.mileage}</span> */}
+              {advert.mileage}
+              <span className={css.line}>|</span>
+              <span className={css.detalies}>{advert.accessories[2]}</span>
+              {/* {advert.accessories[2]} */}
+            {/* </div> */}
+          </li>

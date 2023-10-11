@@ -43,40 +43,44 @@ export const AdvertsGalleryItem = ({id, advert, followFavorite}) => {
 
     return ( 
       <li className={css.item} key={id}>
-        <div className={css.itemAdvert}>
-          <div className={css.itemVector}
-            onClick={() => toogleFavorite(id, advert)}
-          >
-            {isFavorite ? <VectorIsHeart/> : <VectorHeart/>}
-          </div>
-          <img src={advert.img} alt={advert.make} 
-            className={css.itemImage}  
-          />
-          <div className={css.itemInfo}>
-            {advert.make}, {advert.year}
-            <span>{advert.rentalPrice}</span>
-          </div>
-          <div className={css.itemDetaliesBlock}>
-            <div className={css.itemDetalies}>
-              {advert.address.split(',')[1]}
-              <div className={css.line}>|</div>
-              {advert.address.split(',')[2]}
-              <div className={css.line}>|</div>
-              {advert.rentalCompany}
-              <div className={css.line}>|</div>
-              {advert.year}
+        <ul className={css.itemAdvert}>
+          <li className={css.itemImageGroup} >
+            <div className={css.itemVector}
+              onClick={() => toogleFavorite(id, advert)}
+            >
+              {isFavorite ? <VectorIsHeart/> : <VectorHeart/>}
             </div>
-            <div className={css.itemDetalies}>
-              {advert.make}
-              <div className={css.line}>|</div>
-              {advert.year}
-              <div className={css.line}>|</div>
-              {advert.year}
-              <div className={css.line}>|</div>
-              {advert.year}
-            </div>
-          </div>
-        </div>
+            <img src={advert.img} alt={advert.make} 
+              className={css.itemImage}  
+            />
+          </li>
+          <li className={css.itemInfo}>
+            <span>
+              {advert.make} <span className={css.itemModel}>{advert.model}</span>, {advert.year}
+            </span>
+            <span>
+              {advert.rentalPrice}
+            </span>
+          </li>
+          <li className={css.itemDetaliesBlock}>
+            <ul className={css.itemDetalies}>
+              <li className={css.detalies}>{advert.address.split(',')[1]}</li>
+              <li className={css.line}></li>
+              <li className={css.detalies}>{advert.address.split(',')[2]}</li>
+              <li className={css.line}></li>
+              <li className={css.detalies}>{advert.rentalCompany}</li>
+            </ul>
+            <ul className={css.itemDetalies}>
+              <li className={css.detalies}>{advert.type}</li>
+              <li className={css.line}></li>
+              <li className={css.detalies}>{advert.model}</li>
+              <li className={css.line}></li>
+              <li className={css.detalies}>{advert.mileage}</li>
+              <li className={css.line}></li>
+              <li className={css.detalies}>Premium</li>
+            </ul>
+          </li>
+        </ul>
         <button type='button' className={css.itemBtn}
           onClick={openModal}
         >

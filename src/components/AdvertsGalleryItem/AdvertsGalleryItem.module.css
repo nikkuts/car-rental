@@ -9,6 +9,14 @@
     width: 274px;
     height: 354px;
     margin-bottom: 28px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .itemImageGroup {
+    width: 274px;
+    height: 268px;
+    margin-bottom: 14px;
   }
 
   .itemVector {
@@ -23,7 +31,6 @@
   .itemImage {
     width: 274px;
     height: 268px;
-    margin-bottom: 14px;
     object-fit: cover;
     border-radius: 14px;
   }
@@ -38,10 +45,11 @@
     color: #121417;
   }
 
+  .itemModel {
+    color: #3470FF;
+  }
+
   .itemDetaliesBlock {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     width: 274px;
     height: 40px;
     margin-top: 8px;
@@ -50,7 +58,12 @@
   .itemDetalies {
     display: flex;
     justify-content: flex-start;
-    gap: 6px;
+    gap: 4px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .detalies {
     font-family: 'Manrope';
     font-weight: 400;
     font-size: 12px;
@@ -59,9 +72,10 @@
   }
 
   .line {
+    content: "";
     height: 16px;
-    border: 1px;
-    color: rgba(18, 20, 23, 0.1);
+    width: 1px;
+    background-color: rgba(18, 20, 23, 0.1);
   }
   
 .itemBtn {
